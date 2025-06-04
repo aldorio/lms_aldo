@@ -1,14 +1,18 @@
 <?php 
 if(isset($_GET['delete'])){
   $id_user = $_GET['delete'];
-  $queryDelete = mysqli_query($config, "UPDATE instructors SET deleted_at = 1 WHERE id = '$id_user'");
+  $queryDelete = mysqli_query($config, "DELETE FROM instructors WHERE id = '$id_user'");
   if($queryDelete) {
-    header("location:?page=user&hapus=berhasil");
+    header("location:?page=instructors&hapus=berhasil");
   } else {
-    header("location:?page=user&hapus=gagal");
+    header("location:?page=instructors&hapus=gagal");
   }
 
 }
+
+$id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
+$queryEdit = mysqli_query($config, "SELECT * FROM instructors WHERE id = '$id_user'");
+$rowEdit = mysqli_fetch_assoc($queryEdit);
 
 if(isset($_POST['name'])){
   // ada tidak sebuah parameter bernama edit, kalau ada jalankan perintah edit/update
@@ -19,7 +23,7 @@ if(isset($_POST['name'])){
   $phone = $_POST['phone'];
   $email = $_POST['email'];
   $address = $_POST['address'];
-  $id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
+ 
 
   if(!isset($_GET['edit'])){
     $insert = mysqli_query($config, "INSERT INTO instructors (name, gender, education, phone, email, address) VALUES('$name', '$gender', '$education', '$phone', '$email', '$address')");
@@ -41,7 +45,7 @@ if(isset($_POST['name'])){
           <form action="" method="post">
             <div class="mb-3">
               <label for="">Fullname *</label>
-              <input type="text" class="form-control" name="name" placeholder="Enter Your Name" required>
+              <input value="<?php echo isset($rowEdit['name']) ? $rowEdit['name'] : '' ?>" type="text" class="form-control" name="name" placeholder="Enter Your Name" required>
             </div>
             <div class="mb-3">
                 <div class="form-check form-check-inline">
@@ -55,19 +59,19 @@ if(isset($_POST['name'])){
             </div>
             <div class="mb-3">
               <label for="">Education *</label>
-              <input type="text" class="form-control" name="education" placeholder="Enter Your Education" required>
+              <input value="<?php echo isset($rowEdit['education']) ? $rowEdit['education'] : '' ?>" type="text" class="form-control" name="education" placeholder="Enter Your Education" required>
             </div>
             <div class="mb-3">
               <label for="">Phone *</label>
-              <input type="phone" class="form-control" name="phone" placeholder="Enter Your Phone" required>
+              <input value="<?php echo isset($rowEdit['phone']) ? $rowEdit['phone'] : '' ?>" type="phone" class="form-control" name="phone" placeholder="Enter Your Phone" required>
             </div>
             <div class="mb-3">
               <label for="">Email *</label>
-              <input type="email" class="form-control" name="email" placeholder="Enter Your email" required>
+              <input value="<?php echo isset($rowEdit['email']) ? $rowEdit['email'] : '' ?>" type="email" class="form-control" name="email" placeholder="Enter Your email" required>
             </div>
             <div class="mb-3">
               <label for="">Address *</label>
-              <input type="text" class="form-control" name="address" placeholder="Enter Your Address" required>
+              <input value="<?php echo isset($rowEdit['address']) ? $rowEdit['address'] : '' ?>" type="text" class="form-control" name="address" placeholder="Enter Your Address" required>
             </div>
             <div class="mb-3">
               

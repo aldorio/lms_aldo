@@ -24,6 +24,7 @@
                   <th>Phone</th>
                   <th>Email</th>
                   <th>Address</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -32,14 +33,15 @@
                 <tr>
                   <td><?php echo $index += 1;  ?></td>
                   <td><?php echo $row['name']?></td>
-                  <td><?php echo $row['gender'] == 1 ? 'Laki-laki' : 'Perempuan'?></td>
+                  <td><?php echo $row['gender'] == 1 ? 'Male' : 'Female'?></td>
                   <td><?php echo $row['education']?></td>
                   <td><?php echo $row['phone']?></td>
                   <td><?php echo $row['email']?></td>
                   <td><?php echo $row['address']?></td>
                   <td>
-                        <a href="?page=tambah-user&edit=<?php echo $row['id'] ?>" class="btn btn-primary">Edit</a>
-                        <a onclick="return confirm('Are u Sure wanna delete this?')" href="?page=tambah-user&delete=<?php echo $row['id'] ?>" class="btn btn-danger">Delete</a>
+                        <a href="?page=tambah-instructors-majors&id=<?php echo $row ['id'] ?>" class="btn btn-warning">Add Majors</a>
+                        <a href="?page=tambah-instructors&edit=<?php echo $row['id'] ?>" class="btn btn-primary">Edit</a>
+                        <a onclick="return confirm('Are u Sure wanna delete this?')" href="?page=tambah-instructors&delete=<?php echo $row['id'] ?>" class="btn btn-danger">Delete</a>
 
                   </td>
                 </tr>
