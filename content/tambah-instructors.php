@@ -23,13 +23,14 @@ if(isset($_POST['name'])){
   $phone = $_POST['phone'];
   $email = $_POST['email'];
   $address = $_POST['address'];
+  $password = isset($_POST['password']) ? sha1($_POST['password']) : $rowEdit['password'];
  
 
   if(!isset($_GET['edit'])){
-    $insert = mysqli_query($config, "INSERT INTO instructors (name, gender, education, phone, email, address) VALUES('$name', '$gender', '$education', '$phone', '$email', '$address')");
+    $insert = mysqli_query($config, "INSERT INTO instructors (name, gender, education, phone, email, password, address) VALUES('$name', '$gender', '$education', '$phone', '$email', '$password', '$address')");
     header("location:?page=instructors&tambah=berhasil");
   }else{
-    $update = mysqli_query($config, "UPDATE instructors SET name='$name', gender='$gender', education='$education', phone='$phone',  email='$email', address='$address' WHERE id='$id_user'");
+    $update = mysqli_query($config, "UPDATE instructors SET name='$name', gender='$gender', education='$education', phone='$phone',  email='$email', password='$password', address='$address' WHERE id='$id_user'");
     header("location:?page=instructors&ubah=berhasil");
   }
 
@@ -68,6 +69,14 @@ if(isset($_POST['name'])){
             <div class="mb-3">
               <label for="">Email *</label>
               <input value="<?php echo isset($rowEdit['email']) ? $rowEdit['email'] : '' ?>" type="email" class="form-control" name="email" placeholder="Enter Your email" required>
+            </div>
+            <div class="mb-3">
+              <label for="">Password *</label>
+              <input type="password" class="form-control" name="password" placeholder="Enter Your password" 
+              <?php echo empty($_GET['edit']) ? 'required' : '' ?>>
+              <small>
+                )* Jika ingin diubah silahkan diisi
+              </small>
             </div>
             <div class="mb-3">
               <label for="">Address *</label>
