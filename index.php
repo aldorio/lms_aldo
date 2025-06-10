@@ -15,6 +15,8 @@ if(isset($_POST['email'])){
   // jika login dengan role instruktur
   if($role == 1){
     $queryLogin = mysqli_query($config, "SELECT * from instructors WHERE email='$email' AND password='$password'");
+  }elseif($role == 2){
+    $queryLogin = mysqli_query($config, "SELECT * from students WHERE email='$email' AND password='$password'");
   }else{
     $queryLogin = mysqli_query($config, "SELECT * from users WHERE email='$email' AND password='$password'");
   }
@@ -24,6 +26,7 @@ if(isset($_POST['email'])){
     $rowLogin = mysqli_fetch_assoc($queryLogin);
     $_SESSION['ID_USER'] = $rowLogin['id'];
     $_SESSION['NAME'] = $rowLogin['name'];
+    $_SESSION['ID_ROLE'] = $role;
 
     header("location:home.php");
   } else {
