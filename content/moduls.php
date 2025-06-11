@@ -4,10 +4,11 @@
 
   // 
   $rowStudent = mysqli_fetch_assoc(mysqli_query($config, "SELECT * FROM students WHERE id='$id_user'"));
-  $id_majors = $rowStudent['id_majors'];
-  if($id_role == 2){
+  $id_majors = isset ($rowStudent['id_majors']) ? $rowStudent['id_majors'] : '';
+
+  if($id_role == 6){
     $where = "WHERE moduls.id_majors='$id_majors'";   
-  }elseif($id_role == 1) {
+  }elseif($id_role == 4) {
     $where = "WHERE moduls.id_instructors='$id_user'";
   }
 
@@ -25,7 +26,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Data Modul</h5>
-          <?php if($_SESSION['ID_ROLE'] == 1): ?>
+          <?php if(canAddModul(4)): ?>
           <div class="mb-3" align="right">
             <a href="?page=tambah-moduls" class="btn btn-primary">Add Modul</a>
           </div>
@@ -50,9 +51,10 @@
                   <td><?php echo $row['instructors_name']?></td>
                   <td><?php echo $row['majors_name']?></td>
                   <td>
+                    <?php if($id_role == 1): ?>
                         <a href="?page=tambah-moduls&edit=<?php echo $row['id'] ?>" class="btn btn-primary">Edit</a>
                         <a onclick="return confirm('Are u Sure wanna delete this?')" href="?page=tambah-moduls&delete=<?php echo $row['id'] ?>" class="btn btn-danger">Delete</a>
-
+                      <?php endif ?>
                   </td>
                 </tr>
                  <?php endforeach ?>
