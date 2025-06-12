@@ -29,6 +29,7 @@
                   <td><?php echo $index += 1;  ?></td>
                   <td><?php echo $row['name']?></td>
                   <td>
+                        <a href="?page=tambah-roles&add-role-menu=<?php echo $row['id'] ?>" class="btn btn-success">Add Role Menu</a>
                         <a href="?page=tambah-roles&edit=<?php echo $row['id'] ?>" class="btn btn-primary">Edit</a>
                         <a onclick="return confirm('Are u Sure wanna delete this?')" href="?page=tambah-roles&delete=<?php echo $row['id'] ?>" class="btn btn-danger">Delete</a>
 

@@ -130,7 +130,8 @@ $rowRoles = mysqli_fetch_all($queryRoles, MYSQLI_ASSOC);
                         <?php foreach ($rowRoles as $role): ?>
                           <option value="<?php echo $role['id'] ?>"><?php echo $role['name'] ?></option>
                           <?php endforeach ?>
-                          <option value="10">Lainnya</option>
+                          <option value="0">Lainnya</option>
+                          
                         <!-- <option value="1">Instruktur</option>
                         <option value="2">Siswa</option>
                         <option value="3">Lainnya</option> -->
